@@ -85,3 +85,15 @@ html, body {
     background-color: #4CAF50; /* Add a green color to the "active/current" link */
     color: white;
 }
+
+p.link-read-post {
+	text-align: right;
+}
+
+p.link-read-post a {
+	padding: 10px;
+	min-width: 100px;
+	background: #333671;
+	color: #fff;
+	text-decoration: none;
+}

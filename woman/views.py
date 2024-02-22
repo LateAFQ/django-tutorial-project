@@ -1,6 +1,8 @@
 from django.urls import reverse
-from django.shortcuts import render, HttpResponse, Http404, redirect
+from django.shortcuts import render, HttpResponse, Http404, redirect, get_object_or_404
 from django.template.defaultfilters import cut
+
+from .models import Women
 
 menu = [
     {'title': "Главная страница", 'url_name': 'home'},
@@ -17,13 +19,13 @@ data_db = [
 
 
 def index(request):
-    html_data = {
-        'title': 'my_django_server',
+    posts = Women.objects.filter(is_published=1)
+    data = {
+        'title': 'Главная страница',
         'menu': menu,
-        'posts': data_db
+        'posts': posts,
     }
-
-    return render(request, 'woman/index.html', context=html_data)
+    return render(request, 'woman/index.html', context=data)
 
 
 def about(request):
@@ -44,6 +46,19 @@ def archive(request, year):
 
 def categories_by_slug(request, cat_slug):
     return HttpResponse(f'<h1> Статьи по категориям</h1><p>slug:{cat_slug}</p>')
+
+
+def show_post(request, post_slug):
+    post = get_object_or_404(Women, slug=post_slug)
+
+    data = {
+        'title': post.title,
+        'menu': menu,
+        'post': post,
+        'cat_selected': 1,
+    }
+
+    return render(request, 'woman/post.html', context=data)
 
 
 def contact(request):
@@ -72,5 +87,5 @@ def login(request):
 
 
 def page_not_found(request, exception):
-    return HttpResponse('<h1>Страница не найдена')
+    return HttpResponse('<h1>Страница не найдена</h1>')
 
