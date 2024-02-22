@@ -66,8 +66,7 @@ def addpage(request):
 
 def login(request):
     html_data = {
-        'menu': menu,
-        'TEST': 1
+        'menu': menu
     }
     return render(request, 'woman/login.html', context=html_data)
 
