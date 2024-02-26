@@ -59,7 +59,6 @@ html, body {
     top: 0;
     left: 0;
     margin-top: 74px;
-    z-index: 1000; /* чтобы меню было поверх других элементов */
 }
 
 .vertical-menu a {
