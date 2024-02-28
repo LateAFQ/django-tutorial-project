@@ -11,7 +11,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('post/<slug:post_slug>/', views.show_post, name='post'),
-    path('cats/', views.categories, name='cats'),
-    path('cats/<slug:cat_slug>/', views.categories_by_slug, name='cats_by_slug'),
-    path('archive/<year4:year>/', views.archive, name='archive'),
+    path('category/<slug:cat_slug>/', views.show_category, name='category'),
 ]

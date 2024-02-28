@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, HttpResponse, Http404, redirect, get_object_or_404
 from django.template.defaultfilters import cut
 
-from .models import Women
+from .models import Women, Category
 
 menu = [
     {'title': "Главная страница", 'url_name': 'home'},
@@ -19,9 +19,11 @@ data_db = [
 
 
 def index(request):
+    cats = Category.objects.all()
     posts = Women.objects.filter(is_published=1)
     data = {
         'title': 'Главная страница',
+        'cats': cats,
         'menu': menu,
         'posts': posts,
     }
@@ -33,19 +35,18 @@ def about(request):
     return render(request, 'woman/about.html', html_data)
 
 
-def categories(request):
-    return HttpResponse('<h1>Статьи по категориям')
-
-
-def archive(request, year):
-    if year > 2024:
-        uri = reverse('cats_by_slug', args=['HelloSlug'])
-        return redirect(uri)
-    return HttpResponse(f'<h1> Статьи по категориям</h1><p>{year}</p>')
-
-
-def categories_by_slug(request, cat_slug):
-    return HttpResponse(f'<h1> Статьи по категориям</h1><p>slug:{cat_slug}</p>')
+def show_category(request, cat_slug):
+    cats = Category.objects.all()
+    category = get_object_or_404(Category, slug=cat_slug)
+    posts = Women.objects.filter(is_published=1, cat_id=category.pk)
+    data = {
+        'title': f'Рубрика: {category.name}',
+        'menu': menu,
+        'cats': cats,
+        'posts': posts,
+        'cat_selected': category.pk,
+    }
+    return render(request, 'woman/index.html', context=data)
 
 
 def show_post(request, post_slug):

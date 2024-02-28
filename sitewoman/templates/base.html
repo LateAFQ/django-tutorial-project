@@ -21,10 +21,9 @@
     </div>
 
     <div class="vertical-menu">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      <a href="#">Link 4</a>
+        {% for cat in cats %}
+            <a href='{{ cat.get_absolute_url }}'>{{cat.name}}</a>
+        {% endfor %}
     </div>
     <div class="content">
       {% block content %} {% endblock %}
