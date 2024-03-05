@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, HttpResponse, Http404, redirect, get_object_or_404
 from django.template.defaultfilters import cut
 
-from .models import Women, Category
+from .models import Women, Category, TagPost
 
 menu = [
     {'title': "Главная страница", 'url_name': 'home'},
@@ -10,12 +10,6 @@ menu = [
     {'title': "Добавить статью", 'url_name': 'add_page'},
     {'title': "Обратная связь", 'url_name': 'contact'},
     {'title': "Войти", 'url_name': 'login'}]
-
-data_db = [
-    {'id': 1, 'title': 'Анджелина Джоли', 'content': 'Биография Анджелины Джоли', 'is_published': True},
-    {'id': 2, 'title': 'Марго Робби', 'content': 'Биография Марго Робби', 'is_published': False},
-    {'id': 3, 'title': 'Джулия Робертс', 'content': 'Биография Джулии Робертс', 'is_published': True},
-    ]
 
 
 def index(request):
@@ -51,10 +45,11 @@ def show_category(request, cat_slug):
 
 def show_post(request, post_slug):
     post = get_object_or_404(Women, slug=post_slug)
-
+    cats = Category.objects.all()
     data = {
         'title': post.title,
         'menu': menu,
+        'cats': cats,
         'post': post,
         'cat_selected': 1,
     }
@@ -62,27 +57,47 @@ def show_post(request, post_slug):
     return render(request, 'woman/post.html', context=data)
 
 
+def show_tag_postlist(request, tag_slug):
+    tag = get_object_or_404(TagPost, slug=tag_slug)
+    cats = Category.objects.all()
+    posts = tag.tags.filter(is_published=Women.Status.PUBLISHED)
+
+    data = {
+        'title': f'Тег: {tag.tag}',
+        'posts': posts,
+        'menu': menu,
+        'cats': cats
+
+    }
+    return render(request, 'woman/index.html', context=data)
+
+
 def contact(request):
+    cats = Category.objects.all()
     html_data = {
         'title': 'my_django_server',
+        'cats': cats,
         'menu': menu,
-        'posts': data_db
+
     }
     return render(request, 'woman/contact.html', context=html_data)
 
 
 def addpage(request):
+    cats = Category.objects.all()
     html_data = {
         'title': 'my_django_server',
+        'cats': cats,
         'menu': menu,
-        'posts': data_db
     }
     return render(request, 'woman/add_page.html', context=html_data)
 
 
 def login(request):
+    cats = Category.objects.all ()
     html_data = {
-        'menu': menu
+        'menu': menu,
+        'cats': cats
     }
     return render(request, 'woman/login.html', context=html_data)
 
