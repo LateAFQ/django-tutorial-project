@@ -1,0 +1,118 @@
+html, body {
+	font-family: 'Arial';
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	color: #444;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #4d545e;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    border-top: 3px solid #f7823f;
+}
+
+
+.navbar #home{
+    margin-right: 50px;
+    font-family: system-ui;
+    color: #4CAF50;
+}
+
+.navbar #login{
+    margin-left: 700px;
+    font-family: system-ui;
+}
+
+.navbar a {
+    font-size: 30px;
+    float: left;
+    display: block;
+    color: #e7eb0b;
+    text-align: center;
+    padding: 18px 24px;
+    text-decoration: none;
+}
+
+
+
+.navbar a:hover {
+    color: #fdc073;
+}
+
+.content{
+    margin-top: 53px; /* настраиваем отступ сверху для учета вертикального меню */
+    margin-left: 200px; /* настраиваем отступ слева для учета вертикального меню */
+    padding: 20px;
+}
+
+
+.vertical-menu {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    background-color: #928888;
+    top: 0;
+    left: 0;
+    margin-top: 74px;
+}
+
+.vertical-menu a {
+    font-size: 25px;
+    margin-top: 15px;
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 20px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu #home{
+    font-size: 30px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.vertical-menu a:hover {
+    color: #e7eb0b;
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+p.link-read-post {
+	text-align: right;
+}
+
+p.link-read-post a {
+	padding: 10px;
+	min-width: 100px;
+	background: #333671;
+	color: #fff;
+	text-decoration: none;
+}
+
+ul.tags-list {
+    margin-top: 75px;
+    width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.tags-list li {
+	margin: 0;
+	padding: 0 0 10px;
+    display: inline-block;
+}
+
+ul.tags-list li a {
+	padding: 5px;
+	font-size: 16px;
+	border: 1px solid #aaa;
+}
