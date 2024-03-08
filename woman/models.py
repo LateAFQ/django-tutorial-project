@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.db import models
 
 
-
 class PublishedModel(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_published=1)
