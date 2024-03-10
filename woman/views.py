@@ -94,7 +94,7 @@ def addpage(request):
 
 
 def login(request):
-    cats = Category.objects.all ()
+    cats = Category.objects.all()
     html_data = {
         'menu': menu,
         'cats': cats
