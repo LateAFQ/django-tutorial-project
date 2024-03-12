@@ -38,7 +38,11 @@ html, body {
     text-decoration: none;
 }
 
-
+.form_add_page{
+    margin-top: 75px; /* настраиваем отступ сверху для учета вертикального меню */
+    margin-left: 250px; /* настраиваем отступ слева для учета вертикального меню */
+    padding: 40px;
+}
 
 .navbar a:hover {
     color: #fdc073;

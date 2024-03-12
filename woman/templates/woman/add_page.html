@@ -1,5 +1,9 @@
 {% extends 'sitewoman/templates/base.html' %}
 
 {% block content %}
-    <h1> Раздел в разработке, или закрыт по техническим обстоятельствам</h1>
+<form action="" class="form_add_page" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить</button>
+</form>
 {% endblock %}

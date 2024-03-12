@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse, Http404, redirect, get_object
 from django.template.defaultfilters import cut
 
 from .models import Women, Category, TagPost
+from .forms import AddPostForm
 
 menu = [
     {'title': "Главная страница", 'url_name': 'home'},
@@ -11,9 +12,10 @@ menu = [
     {'title': "Обратная связь", 'url_name': 'contact'},
     {'title': "Войти", 'url_name': 'login'}]
 
+cats = Category.objects.all()
+
 
 def index(request):
-    cats = Category.objects.all()
     posts = Women.objects.filter(is_published=1)
     data = {
         'title': 'Главная страница',
@@ -30,7 +32,6 @@ def about(request):
 
 
 def show_category(request, cat_slug):
-    cats = Category.objects.all()
     category = get_object_or_404(Category, slug=cat_slug)
     posts = Women.objects.filter(is_published=1, cat_id=category.pk)
     data = {
@@ -45,7 +46,6 @@ def show_category(request, cat_slug):
 
 def show_post(request, post_slug):
     post = get_object_or_404(Women, slug=post_slug)
-    cats = Category.objects.all()
     data = {
         'title': post.title,
         'menu': menu,
@@ -59,7 +59,6 @@ def show_post(request, post_slug):
 
 def show_tag_postlist(request, tag_slug):
     tag = get_object_or_404(TagPost, slug=tag_slug)
-    cats = Category.objects.all()
     posts = tag.tags.filter(is_published=Women.Status.PUBLISHED)
 
     data = {
@@ -73,7 +72,6 @@ def show_tag_postlist(request, tag_slug):
 
 
 def contact(request):
-    cats = Category.objects.all()
     html_data = {
         'title': 'my_django_server',
         'cats': cats,
@@ -84,17 +82,24 @@ def contact(request):
 
 
 def addpage(request):
-    cats = Category.objects.all()
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = AddPostForm()
+
     html_data = {
-        'title': 'my_django_server',
+        'title': 'Добавить статью',
         'cats': cats,
         'menu': menu,
+        'form': form
     }
+
     return render(request, 'woman/add_page.html', context=html_data)
 
 
 def login(request):
-    cats = Category.objects.all()
     html_data = {
         'menu': menu,
         'cats': cats
