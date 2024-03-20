@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 
 class AddPostForm(forms.ModelForm):
-    cat = forms.ModelChoiceField (queryset=Category.objects.all(), empty_label="Категория не выбрана",
+    cat = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Категория не выбрана",
                                   label="Категории")
 
     class Meta:
@@ -18,7 +18,7 @@ class AddPostForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data['title']
-        if len (title) > 50:
+        if len(title) > 50:
             raise ValidationError ('Длина превышает 50 символов')
 
         return title

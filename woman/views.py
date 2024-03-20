@@ -4,6 +4,8 @@ from django.template.defaultfilters import cut
 
 from .models import Women, Category, TagPost
 from .forms import AddPostForm
+from django.views import View
+
 
 menu = [
     {'title': "Главная страница", 'url_name': 'home'},

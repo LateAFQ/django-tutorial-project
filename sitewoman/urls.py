@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from woman import views
 from woman.views import page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('woman.urls')),
+    path('users/', include(('users.urls', 'users'), namespace='reviews')),
     path("__debug__/", include("debug_toolbar.urls"))
 ]
 

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'woman.apps.WomanConfig',
-    'debug_toolbar'
+    'debug_toolbar',
+    'users'
 
 ]
 
