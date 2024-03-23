@@ -12,8 +12,8 @@ class AddPostForm(forms.ModelForm):
         fields = ['title', 'slug', 'content', 'is_published', 'cat', 'tags']
         labels = {'slug': 'URL'}
         widgets = {
-            'title': forms.TextInput (attrs={'class': 'form-input'}),
-            'content': forms.Textarea (attrs={'cols': 60, 'rows': 10}),
+            'title': forms.TextInput(attrs={'class': 'form-input'}),
+            'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
         }
 
     def clean_title(self):

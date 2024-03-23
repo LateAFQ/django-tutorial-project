@@ -7,13 +7,6 @@ from .forms import AddPostForm
 from django.views import View
 
 
-menu = [
-    {'title': "Главная страница", 'url_name': 'home'},
-    {'title': "О сайте", 'url_name': 'about'},
-    {'title': "Добавить статью", 'url_name': 'add_page'},
-    {'title': "Обратная связь", 'url_name': 'contact'},
-    {'title': "Войти", 'url_name': 'login'}]
-
 cats = Category.objects.all()
 
 
@@ -22,7 +15,6 @@ def index(request):
     data = {
         'title': 'Главная страница',
         'cats': cats,
-        'menu': menu,
         'posts': posts,
     }
     return render(request, 'woman/index.html', context=data)
@@ -38,7 +30,6 @@ def show_category(request, cat_slug):
     posts = Women.objects.filter(is_published=1, cat_id=category.pk)
     data = {
         'title': f'Рубрика: {category.name}',
-        'menu': menu,
         'cats': cats,
         'posts': posts,
         'cat_selected': category.pk,
@@ -50,7 +41,6 @@ def show_post(request, post_slug):
     post = get_object_or_404(Women, slug=post_slug)
     data = {
         'title': post.title,
-        'menu': menu,
         'cats': cats,
         'post': post,
         'cat_selected': 1,
@@ -66,7 +56,6 @@ def show_tag_postlist(request, tag_slug):
     data = {
         'title': f'Тег: {tag.tag}',
         'posts': posts,
-        'menu': menu,
         'cats': cats
 
     }
@@ -77,7 +66,6 @@ def contact(request):
     html_data = {
         'title': 'my_django_server',
         'cats': cats,
-        'menu': menu,
 
     }
     return render(request, 'woman/contact.html', context=html_data)
@@ -97,7 +85,6 @@ def addpage(request):
     html_data = {
         'title': 'Добавить статью',
         'cats': cats,
-        'menu': menu,
         'form': form
     }
 
@@ -106,7 +93,6 @@ def addpage(request):
 
 def login(request):
     html_data = {
-        'menu': menu,
         'cats': cats
     }
     return render(request, 'woman/login.html', context=html_data)
