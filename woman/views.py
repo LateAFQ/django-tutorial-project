@@ -5,6 +5,7 @@ from django.template.defaultfilters import cut
 from .models import Women, Category, TagPost
 from .forms import AddPostForm
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
 
 cats = Category.objects.all()
@@ -71,6 +72,7 @@ def contact(request):
     return render(request, 'woman/contact.html', context=html_data)
 
 
+@login_required(login_url='/users/login/')
 def addpage(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
@@ -89,13 +91,6 @@ def addpage(request):
     }
 
     return render(request, 'woman/add_page.html', context=html_data)
-
-
-def login(request):
-    html_data = {
-        'cats': cats
-    }
-    return render(request, 'woman/login.html', context=html_data)
 
 
 def page_not_found(request, exception):
